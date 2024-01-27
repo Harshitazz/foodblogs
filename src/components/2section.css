@@ -1,0 +1,34 @@
+
+  
+  .post-image2 {
+    position: relative;
+    overflow: hidden;
+    height: 70%; 
+    text-align: center;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .post-image2 img {
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    align-items: center;
+
+  }
+  
+  .post-content2 {
+    display: inline-block;
+    height: 30%;
+    background-color: rgba(33, 73, 42, 0.8);
+    padding: 10px;
+    width: 100%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: #fff;
+  }
+  
+
+  
+
+  
