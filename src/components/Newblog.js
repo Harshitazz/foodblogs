@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
-import './Newblog.css'; // Import CSS file for styling
+import React, { useState } from "react";
+import "./Newblog.css"; // Import CSS file for styling
 
 const Newblog = ({ onClose }) => {
   const [formData, setFormData] = useState({
-    title: '',
-    content: '',
-    author: '',
+    title: "",
+    content: "",
+    author: "",
+    image: null, // Add image property to formData
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
+    const { name, value, type } = e.target;
+    // Handle file input separately
+    if (type === "file") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: e.target.files[0], // Only take the first file if multiple files are selected
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -29,17 +38,52 @@ const Newblog = ({ onClose }) => {
       <form className="new-post-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title:</label>
-          <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="form-group">
           <label htmlFor="content">Content:</label>
-          <textarea id="content" name="content" value={formData.content} onChange={handleChange} required />
+          <textarea
+            id="content"
+            name="content"
+            value={formData.content}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="form-group">
-          <label htmlFor="author">Author:</label>
-          <input type="text" id="author" name="author" value={formData.author} onChange={handleChange} required />
+          <label htmlFor="author">Ingredients:</label>
+          <input
+            type="text"
+            id="author"
+            name="author"
+            value={formData.author}
+            onChange={handleChange}
+            required
+          />
         </div>
-        <button type="submit" className="submit-button">Submit</button>
+        {/* Add image input */}
+        <div className="form-group">
+          <label htmlFor="image">Image:</label>
+          <div>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*" // Specify accepted file types (images in this case)
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <button type="submit" className="submit-button">
+          Submit
+        </button>
       </form>
     </div>
   );
